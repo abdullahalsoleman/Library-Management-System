@@ -5,6 +5,9 @@ import com.library.UnitOfWork.UnitOfWork;
 import com.library.dto.RequestStatus;
 import com.library.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,18 +25,21 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value="books")
     public List<Book> getAllBooks() {
         return unitOfWork.getBookRepository().findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value="books", key="#id")
     public Optional<Book> getBookById(Long id) {
         return unitOfWork.getBookRepository().findById(id);
     }
 
     @Override
     @Transactional
+    @CacheEvict(value = "books", beforeInvocation = true)
     public RequestStatus addBook(Book book) {
         unitOfWork.getBookRepository().save(book);
         return new RequestStatus(true, "Book added successfully.");
@@ -41,6 +47,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "books", beforeInvocation = true)
     public RequestStatus updateBook(Long id, Book book) {
         Optional<Book> existingBook = unitOfWork.getBookRepository().findById(id);
         if (existingBook.isPresent()) {
@@ -54,6 +61,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "books", beforeInvocation = true)
     public RequestStatus deleteBook(Long id) {
         if (unitOfWork.getBookRepository().existsById(id)) {
             unitOfWork.getBookRepository().deleteById(id);

@@ -36,9 +36,7 @@ public class BookController {
         // Retrieve all books from the service
         List<Book> books = service.getBookService().getAllBooks();
         // Convert List<Book> to List<BookDTO> using ModelMapper
-        List<BookDTO> bookDTOs = books.stream()
-                .map(book -> modelMapper.map(book, BookDTO.class))
-                .collect(Collectors.toList());
+        List<BookDTO> bookDTOs = modelMapper.map(books, List.class);
         // Return the list of BookDTOs with HTTP status 200 OK
         return ResponseEntity.ok(bookDTOs);
     }
