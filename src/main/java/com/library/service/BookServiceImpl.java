@@ -4,8 +4,6 @@ import com.library.IService.BookService;
 import com.library.UnitOfWork.UnitOfWork;
 import com.library.dto.RequestStatus;
 import com.library.model.Book;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
