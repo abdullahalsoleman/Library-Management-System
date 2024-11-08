@@ -3,6 +3,7 @@ package com.library.UnitOfWork;
 import com.library.IRepository.BookRepository;
 import com.library.IRepository.BorrowingRecordRepository;
 import com.library.IRepository.PatronRepository;
+import com.library.IRepository.UserRepository;
 
 public interface UnitOfWork {
 
@@ -11,4 +12,6 @@ public interface UnitOfWork {
     PatronRepository getPatronRepository();
 
     BorrowingRecordRepository getBorrowingRecordRepository();
+
+    UserRepository getUserRepository();
 }
