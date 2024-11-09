@@ -17,4 +17,8 @@ public class LoginUserDto {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$", message = "Password must contain at least one lowercase letter, one uppercase letter, and one number")
     private String password;
 
+    public LoginUserDto(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

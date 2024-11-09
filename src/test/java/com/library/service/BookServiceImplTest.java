@@ -36,9 +36,9 @@ class BookServiceImplTest {
         Book book = new Book();
         book.setTitle("Test Book");
 
-        // Mock the repository save method to do nothing
+        // Mock the repository save method to return the book
         when(unitOfWork.getBookRepository()).thenReturn(bookRepository);
-        doNothing().when(bookRepository).save(any(Book.class));
+        when(bookRepository.save(any(Book.class))).thenReturn(book);  // Mock saving and returning the book
 
         RequestStatus response = bookService.addBook(book);
         assertTrue(response.isSuccess());

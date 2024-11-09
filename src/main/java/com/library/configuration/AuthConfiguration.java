@@ -1,6 +1,7 @@
 package com.library.configuration;
 
 import com.library.IRepository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,12 +16,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class AuthConfiguration {
 
     // Repository to access user data from the database
-    private final UserRepository userRepository;
+   @Autowired
+    private  UserRepository userRepository;
 
     // Constructor injection of UserRepository
-    public AuthConfiguration(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     /**
      * Bean definition for UserDetailsService, which loads user-specific data.

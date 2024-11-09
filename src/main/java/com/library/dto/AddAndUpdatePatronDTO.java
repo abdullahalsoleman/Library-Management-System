@@ -4,8 +4,10 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class AddAndUpdatePatronDTO {
     @NotBlank(message = "Name is required")
     @Size(max = 50, message = "Name can have a maximum of 50 characters")
